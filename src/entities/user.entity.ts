@@ -7,12 +7,12 @@ export class User {
 
   public readonly password: string;
 
-  public readonly timestamp: Date;
+  public readonly createdAt: Date;
 
   constructor({ email, name, password }: CreateUserDTO) {
     this.email = email;
     this.password = password;
     this.name = name;
-    this.timestamp = new Date();
+    this.createdAt = new Date();
   }
 }

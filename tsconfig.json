@@ -20,7 +20,9 @@
     "rootDir": "./src",
     "outDir": "dist",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@/dto/*" : ["./dto/*"],
+      "@/entities/*" : ["./entities/*"]
     },
     "plugins": [
       {

@@ -1,20 +1,27 @@
 import { CreateUserDTO } from "@/dto/create-user.dto";
+import { User } from "@/entities/user.entity";
+import { UserRepositoryInterface } from "@/repositories/user-repository-interface";
+import TYPES from "@/types";
+import { inject, injectable } from "inversify";
+import { User as PrismaUser } from "@prisma/client";
 import { CreateUserServiceInterface } from "./interfaces/create-user-service-interface";
-import { UserRepositoryInterface } from "../../repositories/user-repository-interface";
-import { User } from "../../entities/user.entity";
 
+@injectable()
 export class CreateUserService implements CreateUserServiceInterface {
   private readonly userRepository: UserRepositoryInterface;
 
-  constructor(userRepository: UserRepositoryInterface) {
+  constructor(
+    @inject(TYPES.UserRepositoryInterface)
+    userRepository: UserRepositoryInterface
+  ) {
     this.userRepository = userRepository;
   }
 
-  async execute(user: CreateUserDTO): Promise<void> {
+  public async execute(user: CreateUserDTO): Promise<void | PrismaUser> {
     const userDb = new User(user);
 
-    await this.userRepository.create(userDb);
+    const createdUser = await this.userRepository.create(userDb);
 
-    console.log(userDb);
+    return createdUser;
   }
 }
