@@ -1,6 +1,5 @@
 import { User } from "@/entities/user.entity";
-import { inject, injectable } from "inversify";
-import TYPES from "@/types";
+import { injectable } from "inversify";
 import { User as PrismaUser } from "@prisma/client";
 import { UserRepositoryInterface } from "../user-repository-interface";
 import { DBContext } from "../../data/DBContext";
@@ -9,7 +8,7 @@ import { DBContext } from "../../data/DBContext";
 export class UserRepositoryPrisma implements UserRepositoryInterface {
   private readonly prisma: DBContext;
 
-  constructor(@inject(TYPES.DBContext) prisma: DBContext) {
+  constructor(prisma: DBContext) {
     this.prisma = prisma;
   }
 
