@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2016", 
+    "module": "commonjs", 
+    "esModuleInterop": true, 
+    "forceConsistentCasingInFileNames": true, 
+    "strict": true, 
+    "skipLibCheck": true, 
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "types": [
+      "reflect-metadata"
+    ],
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "src",
+    "rootDir": "src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
