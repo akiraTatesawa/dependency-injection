@@ -16,11 +16,17 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": "src",
-    "rootDir": "src",
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "outDir": "dist",
     "paths": {
       "@/*": ["*"]
-    }
+    },
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      }
+    ]
   },
   "include": ["src"],
   "exclude": ["node_modules"]
