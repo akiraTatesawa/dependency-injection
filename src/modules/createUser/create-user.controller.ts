@@ -1,3 +1,4 @@
+import { SchemaValidator } from "@/middlewares/schema-validator";
 import TYPES from "@/types";
 import { Request } from "express";
 import { inject } from "inversify";
@@ -24,7 +25,7 @@ export class CreateUserController
     this.createUserService = createUserService;
   }
 
-  @httpPost("/")
+  @httpPost("/", SchemaValidator.validateBody("createUserSchema"))
   public async create(req: Request): Promise<interfaces.IHttpActionResult> {
     const user = await this.createUserService.execute(req.body);
 

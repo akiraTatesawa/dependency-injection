@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as express from "express";
+import "express-async-errors";
 import "dotenv/config";
 import { InversifyExpressServer } from "inversify-express-utils";
 import { Container } from "inversify";
@@ -12,6 +14,7 @@ import { CreateUserService } from "@/modules/createUser/create-user.service";
 import { Application } from "@/lib/abstract-application";
 
 import "@/modules/createUser/create-user.controller";
+import { ExceptionHandler } from "@/middlewares/exception-handler";
 
 export class App extends Application {
   private server: InversifyExpressServer;
@@ -22,6 +25,9 @@ export class App extends Application {
     this.server = new InversifyExpressServer(this.container);
     this.server.setConfig((app) => {
       app.use(express.json());
+    });
+    this.server.setErrorConfig((app) => {
+      app.use(ExceptionHandler.handle);
     });
   }
 
