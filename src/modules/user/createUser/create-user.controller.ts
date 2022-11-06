@@ -8,7 +8,7 @@ import {
   httpPost,
   interfaces,
 } from "inversify-express-utils";
-import { CreateUserServiceInterface } from "./interfaces/create-user-service-interface";
+import { CreateUserServiceInterface } from "./interfaces/create-user-service.interface";
 
 @controller("/users")
 export class CreateUserController

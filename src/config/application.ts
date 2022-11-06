@@ -9,11 +9,11 @@ import TYPES from "@/types";
 import { UserRepositoryPrisma } from "@/repositories/prisma/user-repository-prisma";
 import { DBContext } from "@/data/DBContext";
 import { UserRepositoryInterface } from "@/repositories/user-repository-interface";
-import { CreateUserServiceInterface } from "@/modules/createUser/interfaces/create-user-service-interface";
-import { CreateUserService } from "@/modules/createUser/create-user.service";
+import { CreateUserServiceInterface } from "@/modules/user/createUser/interfaces/create-user-service-interface";
+import { CreateUserService } from "@/modules/user/createUser/create-user.service";
 import { Application } from "@/lib/abstract-application";
 
-import "@/modules/createUser/create-user.controller";
+import "@/modules/user/createUser/create-user.controller";
 import { ExceptionHandler } from "@/middlewares/exception-handler";
 
 export class App extends Application {

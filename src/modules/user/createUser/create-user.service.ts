@@ -7,7 +7,7 @@ import TYPES from "@/types";
 import { inject, injectable } from "inversify";
 import { User as PrismaUser } from "@prisma/client";
 import { CustomError } from "@/lib/errors";
-import { CreateUserServiceInterface } from "./interfaces/create-user-service-interface";
+import { CreateUserServiceInterface } from "./interfaces/create-user-service.interface";
 
 @injectable()
 export class CreateUserService implements CreateUserServiceInterface {
