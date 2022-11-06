@@ -1,6 +1,7 @@
 import { User } from "@/entities/user.entity";
 import { injectable } from "inversify";
 import { User as PrismaUser } from "@prisma/client";
+import { UpdateUserDTO } from "@/dto/update-user.dto";
 import { UserRepositoryInterface } from "../user-repository-interface";
 import { DBContext } from "../../data/DBContext";
 
@@ -36,5 +37,16 @@ export class UserRepositoryPrisma implements UserRepositoryInterface {
 
   public async findAll(): Promise<PrismaUser[]> {
     return this.prisma.user.findMany();
+  }
+
+  public async update({ id, ...data }: UpdateUserDTO): Promise<void> {
+    await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        ...data,
+      },
+    });
   }
 }

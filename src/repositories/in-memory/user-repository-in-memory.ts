@@ -4,6 +4,7 @@ import { User } from "@/entities/user.entity";
 import { injectable } from "inversify";
 import { User as PrismaUser } from "@prisma/client";
 import { randUuid } from "@ngneat/falso";
+import { UpdateUserDTO } from "@/dto/update-user.dto";
 import { UserRepositoryInterface } from "../user-repository-interface";
 
 @injectable()
@@ -42,5 +43,13 @@ export class UserRepositoryInMemory implements UserRepositoryInterface {
 
   public async findAll(): Promise<PrismaUser[]> {
     return this.users;
+  }
+
+  public async update({ id, name }: UpdateUserDTO): Promise<void> {
+    const userIndex = this.users.findIndex(
+      (inMemoryUser) => inMemoryUser.id === id
+    );
+
+    this.users[userIndex].name = name;
   }
 }
