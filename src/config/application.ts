@@ -9,12 +9,15 @@ import TYPES from "@/types";
 import { UserRepositoryPrisma } from "@/repositories/prisma/user-repository-prisma";
 import { DBContext } from "@/data/DBContext";
 import { UserRepositoryInterface } from "@/repositories/user-repository-interface";
-import { CreateUserServiceInterface } from "@/modules/user/createUser/interfaces/create-user-service-interface";
 import { CreateUserService } from "@/modules/user/createUser/create-user.service";
 import { Application } from "@/lib/abstract-application";
 
-import "@/modules/user/createUser/create-user.controller";
 import { ExceptionHandler } from "@/middlewares/exception-handler";
+import { CreateUserServiceInterface } from "@/modules/user/createUser/interfaces/create-user-service.interface";
+
+import "@/modules/user/user.controller";
+import { GetUserServiceInterface } from "../modules/user/getUser/interfaces/get-user-service.interface";
+import { GetUserService } from "../modules/user/getUser/get-user.service";
 
 export class App extends Application {
   private server: InversifyExpressServer;
@@ -39,6 +42,9 @@ export class App extends Application {
     container
       .bind<CreateUserServiceInterface>(TYPES.CreateUserServiceInterface)
       .to(CreateUserService);
+    container
+      .bind<GetUserServiceInterface>(TYPES.GetUserServiceInterface)
+      .to(GetUserService);
   }
 
   public get getApp(): express.Application {
