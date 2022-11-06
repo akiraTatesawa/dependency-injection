@@ -3,5 +3,5 @@ import { ServiceExecute } from "@/lib/service.interface";
 
 export type GetUserRequest = { id: string };
 
-export interface GetUserService
+export interface GetUserServiceInterface
   extends ServiceExecute<GetUserRequest, UserDTO> {}

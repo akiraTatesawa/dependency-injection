@@ -25,4 +25,12 @@ export class UserRepositoryPrisma implements UserRepositoryInterface {
       data: user,
     });
   }
+
+  public async findById(id: string): Promise<PrismaUser | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 }

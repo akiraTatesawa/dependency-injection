@@ -29,4 +29,14 @@ export class UserRepositoryInMemory implements UserRepositoryInterface {
 
     return user;
   }
+
+  public async findById(id: string): Promise<PrismaUser | null> {
+    const user = this.users.find((inMemoryUser) => inMemoryUser.id === id);
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
+  }
 }
