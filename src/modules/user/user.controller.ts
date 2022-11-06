@@ -4,9 +4,11 @@ import {
   BaseHttpController,
   controller,
   httpGet,
+  httpPatch,
   httpPost,
   interfaces,
   request,
+  requestBody,
   requestParam,
   response,
 } from "inversify-express-utils";
@@ -15,6 +17,7 @@ import { SchemaValidator } from "@/middlewares/schema-validator";
 import { CreateUserServiceInterface } from "./createUser/interfaces/create-user-service.interface";
 import { GetUserServiceInterface } from "./getUser/interfaces/get-user-service.interface";
 import { GetAllUsersServiceInterface } from "./getAllUsers/interfaces/get-all-users-service.interface";
+import { UpdateUserServiceInterface } from "./updateUser/interfaces/update-user-service.interface";
 
 @controller("/users")
 export class UserController
@@ -27,18 +30,23 @@ export class UserController
 
   private readonly getAllUsersService: GetAllUsersServiceInterface;
 
+  private readonly updateUserService: UpdateUserServiceInterface;
+
   constructor(
     @inject(TYPES.CreateUserServiceInterface)
     createUserService: CreateUserServiceInterface,
     @inject(TYPES.GetUserServiceInterface)
     getUserService: GetUserServiceInterface,
     @inject(TYPES.GetAllUsersServiceInterface)
-    getAllUsersService: GetAllUsersServiceInterface
+    getAllUsersService: GetAllUsersServiceInterface,
+    @inject(TYPES.UpdateUserServiceInterface)
+    updateUserService: UpdateUserServiceInterface
   ) {
     super();
     this.createUserService = createUserService;
     this.getUserService = getUserService;
     this.getAllUsersService = getAllUsersService;
+    this.updateUserService = updateUserService;
   }
 
   @httpPost("/", SchemaValidator.validateBody("createUserSchema"))
@@ -66,5 +74,16 @@ export class UserController
     const user = await this.getAllUsersService.execute();
 
     return res.status(200).send(user);
+  }
+
+  @httpPatch("/:id", SchemaValidator.validateBody("updateUserSchema"))
+  public async update(
+    @requestParam("id") id: string,
+    @requestBody() body: { name: string },
+    @response() res: express.Response
+  ) {
+    await this.updateUserService.execute({ id, name: body.name });
+
+    return res.status(200).send();
   }
 }

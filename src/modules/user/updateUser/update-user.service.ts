@@ -2,9 +2,10 @@ import { UpdateUserDTO } from "@/dto/update-user.dto";
 import { CustomError } from "@/lib/errors";
 import { UserRepositoryInterface } from "@/repositories/user-repository-interface";
 import TYPES from "@/types";
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import { UpdateUserServiceInterface } from "./interfaces/update-user-service.interface";
 
+@injectable()
 export class UpdateUserService implements UpdateUserServiceInterface {
   private readonly userRepository: UserRepositoryInterface;
 

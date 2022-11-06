@@ -7,4 +7,8 @@ const createUserSchema = Joi.object<CreateUserDTO>({
   name: Joi.string().required(),
 });
 
-export { createUserSchema };
+const updateUserSchema = Joi.object<{ name: string }>({
+  name: Joi.string().required(),
+});
+
+export { createUserSchema, updateUserSchema };

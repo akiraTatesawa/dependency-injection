@@ -20,6 +20,8 @@ import { GetUserServiceInterface } from "@/modules/user/getUser/interfaces/get-u
 import { GetUserService } from "@/modules/user/getUser/get-user.service";
 import { GetAllUsersServiceInterface } from "@/modules/user/getAllUsers/interfaces/get-all-users-service.interface";
 import { GetAllUsersService } from "@/modules/user/getAllUsers/get-all-users.service";
+import { UpdateUserServiceInterface } from "../modules/user/updateUser/interfaces/update-user-service.interface";
+import { UpdateUserService } from "../modules/user/updateUser/update-user.service";
 
 export class App extends Application {
   private server: InversifyExpressServer;
@@ -50,6 +52,9 @@ export class App extends Application {
     container
       .bind<GetAllUsersServiceInterface>(TYPES.GetAllUsersServiceInterface)
       .to(GetAllUsersService);
+    container
+      .bind<UpdateUserServiceInterface>(TYPES.UpdateUserServiceInterface)
+      .to(UpdateUserService);
   }
 
   public get getApp(): express.Application {
