@@ -33,4 +33,8 @@ export class UserRepositoryPrisma implements UserRepositoryInterface {
       },
     });
   }
+
+  public async findAll(): Promise<PrismaUser[]> {
+    return this.prisma.user.findMany();
+  }
 }

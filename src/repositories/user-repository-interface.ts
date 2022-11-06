@@ -5,4 +5,5 @@ export interface UserRepositoryInterface {
   create(user: User): Promise<PrismaUser>;
   findByEmail(email: string): Promise<null | PrismaUser>;
   findById(id: string): Promise<null | PrismaUser>;
+  findAll(): Promise<PrismaUser[]>;
 }

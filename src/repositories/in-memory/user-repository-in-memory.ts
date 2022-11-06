@@ -39,4 +39,8 @@ export class UserRepositoryInMemory implements UserRepositoryInterface {
 
     return user;
   }
+
+  public async findAll(): Promise<PrismaUser[]> {
+    return this.users;
+  }
 }
