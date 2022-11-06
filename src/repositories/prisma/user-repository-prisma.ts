@@ -12,7 +12,15 @@ export class UserRepositoryPrisma implements UserRepositoryInterface {
     this.prisma = prisma;
   }
 
-  public async create(user: User): Promise<void | PrismaUser> {
+  public async findByEmail(email: string): Promise<PrismaUser | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+  }
+
+  public async create(user: User): Promise<PrismaUser> {
     return this.prisma.user.create({
       data: user,
     });

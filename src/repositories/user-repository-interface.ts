@@ -3,4 +3,5 @@ import { User } from "@/entities/user.entity";
 
 export interface UserRepositoryInterface {
   create(user: User): Promise<PrismaUser>;
+  findByEmail(email: string): Promise<null | PrismaUser>;
 }

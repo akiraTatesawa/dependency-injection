@@ -10,11 +10,23 @@ import { UserRepositoryInterface } from "../user-repository-interface";
 export class UserRepositoryInMemory implements UserRepositoryInterface {
   private users: PrismaUser[] = [];
 
-  async create(user: User): Promise<PrismaUser> {
+  public async create(user: User): Promise<PrismaUser> {
     const repoUser: PrismaUser = { ...user, id: randUuid() };
 
     this.users.push(repoUser);
 
     return repoUser;
+  }
+
+  public async findByEmail(email: string): Promise<PrismaUser | null> {
+    const user = this.users.find(
+      (inMemoryUser) => inMemoryUser.email === email
+    );
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
   }
 }
