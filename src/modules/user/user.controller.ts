@@ -14,6 +14,7 @@ import * as express from "express";
 import { SchemaValidator } from "@/middlewares/schema-validator";
 import { CreateUserServiceInterface } from "./createUser/interfaces/create-user-service.interface";
 import { GetUserServiceInterface } from "./getUser/interfaces/get-user-service.interface";
+import { GetAllUsersServiceInterface } from "./getAllUsers/interfaces/get-all-users-service.interface";
 
 @controller("/users")
 export class UserController
@@ -24,15 +25,20 @@ export class UserController
 
   private readonly getUserService: GetUserServiceInterface;
 
+  private readonly getAllUsersService: GetAllUsersServiceInterface;
+
   constructor(
     @inject(TYPES.CreateUserServiceInterface)
     createUserService: CreateUserServiceInterface,
     @inject(TYPES.GetUserServiceInterface)
-    getUserService: GetUserServiceInterface
+    getUserService: GetUserServiceInterface,
+    @inject(TYPES.GetAllUsersServiceInterface)
+    getAllUsersService: GetAllUsersServiceInterface
   ) {
     super();
     this.createUserService = createUserService;
     this.getUserService = getUserService;
+    this.getAllUsersService = getAllUsersService;
   }
 
   @httpPost("/", SchemaValidator.validateBody("createUserSchema"))
@@ -51,6 +57,13 @@ export class UserController
     @response() res: express.Response
   ) {
     const user = await this.getUserService.execute({ id });
+
+    return res.status(200).send(user);
+  }
+
+  @httpGet("/")
+  public async listAll(@response() res: express.Response) {
+    const user = await this.getAllUsersService.execute();
 
     return res.status(200).send(user);
   }

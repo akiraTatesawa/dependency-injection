@@ -16,8 +16,10 @@ import { ExceptionHandler } from "@/middlewares/exception-handler";
 import { CreateUserServiceInterface } from "@/modules/user/createUser/interfaces/create-user-service.interface";
 
 import "@/modules/user/user.controller";
-import { GetUserServiceInterface } from "../modules/user/getUser/interfaces/get-user-service.interface";
-import { GetUserService } from "../modules/user/getUser/get-user.service";
+import { GetUserServiceInterface } from "@/modules/user/getUser/interfaces/get-user-service.interface";
+import { GetUserService } from "@/modules/user/getUser/get-user.service";
+import { GetAllUsersServiceInterface } from "@/modules/user/getAllUsers/interfaces/get-all-users-service.interface";
+import { GetAllUsersService } from "@/modules/user/getAllUsers/get-all-users.service";
 
 export class App extends Application {
   private server: InversifyExpressServer;
@@ -45,6 +47,9 @@ export class App extends Application {
     container
       .bind<GetUserServiceInterface>(TYPES.GetUserServiceInterface)
       .to(GetUserService);
+    container
+      .bind<GetAllUsersServiceInterface>(TYPES.GetAllUsersServiceInterface)
+      .to(GetAllUsersService);
   }
 
   public get getApp(): express.Application {
