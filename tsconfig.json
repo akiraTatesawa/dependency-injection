@@ -11,7 +11,8 @@
       "dom"
     ],
     "types": [
-      "reflect-metadata"
+      "reflect-metadata",
+      "jest"
     ],
     "moduleResolution": "node",
     "experimentalDecorators": true,

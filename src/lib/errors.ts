@@ -1,30 +1,32 @@
+import httpStatus from "http-status";
+
 export const Errors = {
   error_bad_request: {
-    status: 400,
+    status: httpStatus.BAD_REQUEST,
     name: "Bad Request",
   },
   error_unauthorized: {
-    status: 401,
+    status: httpStatus.UNAUTHORIZED,
     name: "Unauthorized",
   },
   error_forbidden: {
-    status: 403,
+    status: httpStatus.FORBIDDEN,
     name: "Forbidden",
   },
   error_not_found: {
-    status: 404,
+    status: httpStatus.NOT_FOUND,
     name: "Not Found",
   },
   error_conflict: {
-    status: 409,
+    status: httpStatus.CONFLICT,
     name: "Conflict",
   },
   error_unprocessable_entity: {
-    status: 422,
+    status: httpStatus.UNPROCESSABLE_ENTITY,
     name: "Unprocessable Entity",
   },
   error_internal_server_error: {
-    status: 500,
+    status: httpStatus.INTERNAL_SERVER_ERROR,
     name: "Internal Server Error",
   },
 };

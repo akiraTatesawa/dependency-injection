@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { CreateUserDTO } from "@/dto/create-user.dto";
 import { User } from "@/entities/user.entity";
 import { UserRepositoryInterface } from "@/repositories/user-repository-interface";
@@ -17,7 +19,7 @@ export class CreateUserService implements CreateUserServiceInterface {
     this.userRepository = userRepository;
   }
 
-  public async execute(user: CreateUserDTO): Promise<void | PrismaUser> {
+  public async execute(user: CreateUserDTO): Promise<PrismaUser> {
     const userDb = new User(user);
 
     const createdUser = await this.userRepository.create(userDb);
