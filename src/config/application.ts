@@ -22,6 +22,8 @@ import { GetAllUsersServiceInterface } from "@/modules/user/getAllUsers/interfac
 import { GetAllUsersService } from "@/modules/user/getAllUsers/get-all-users.service";
 import { UpdateUserServiceInterface } from "../modules/user/updateUser/interfaces/update-user-service.interface";
 import { UpdateUserService } from "../modules/user/updateUser/update-user.service";
+import { DeleteUserServiceInterface } from "../modules/user/deleteUser/interfaces/delete-user-service.interface";
+import { DeleteUserService } from "../modules/user/deleteUser/delete-user.service";
 
 export class App extends Application {
   private server: InversifyExpressServer;
@@ -55,6 +57,9 @@ export class App extends Application {
     container
       .bind<UpdateUserServiceInterface>(TYPES.UpdateUserServiceInterface)
       .to(UpdateUserService);
+    container
+      .bind<DeleteUserServiceInterface>(TYPES.DeleteUserServiceInterface)
+      .to(DeleteUserService);
   }
 
   public get getApp(): express.Application {

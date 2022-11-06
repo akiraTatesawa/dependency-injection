@@ -26,8 +26,6 @@ describe("Get All Users Service", () => {
   it("Should return an array with all the users", async () => {
     const users = await getAllUsersService.execute();
 
-    console.log(users);
-
     expect(users).toBeInstanceOf(Array);
     expect(users[1]).toHaveProperty("id");
   });

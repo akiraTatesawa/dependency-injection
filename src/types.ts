@@ -4,6 +4,7 @@ const TYPES = {
   GetUserServiceInterface: Symbol.for("GetUserServiceInterface"),
   GetAllUsersServiceInterface: Symbol.for("GetAllUsersServiceInterface"),
   UpdateUserServiceInterface: Symbol.for("UpdateUserServiceInterface"),
+  DeleteUserServiceInterface: Symbol.for("DeleteUserServiceInterface"),
 };
 
 export default TYPES;

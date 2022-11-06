@@ -52,4 +52,12 @@ export class UserRepositoryInMemory implements UserRepositoryInterface {
 
     this.users[userIndex].name = name;
   }
+
+  public async delete(id: string): Promise<void> {
+    const userIndex = this.users.findIndex(
+      (inMemoryUser) => inMemoryUser.id === id
+    );
+
+    this.users.splice(userIndex, 1);
+  }
 }

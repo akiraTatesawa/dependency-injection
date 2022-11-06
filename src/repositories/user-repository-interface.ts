@@ -8,4 +8,5 @@ export interface UserRepositoryInterface {
   findById(id: string): Promise<null | PrismaUser>;
   findAll(): Promise<PrismaUser[]>;
   update(data: UpdateUserDTO): Promise<void>;
+  delete(id: string): Promise<void>;
 }

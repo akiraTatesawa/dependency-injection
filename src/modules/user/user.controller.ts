@@ -3,6 +3,7 @@ import { inject } from "inversify";
 import {
   BaseHttpController,
   controller,
+  httpDelete,
   httpGet,
   httpPatch,
   httpPost,
@@ -18,6 +19,7 @@ import { CreateUserServiceInterface } from "./createUser/interfaces/create-user-
 import { GetUserServiceInterface } from "./getUser/interfaces/get-user-service.interface";
 import { GetAllUsersServiceInterface } from "./getAllUsers/interfaces/get-all-users-service.interface";
 import { UpdateUserServiceInterface } from "./updateUser/interfaces/update-user-service.interface";
+import { DeleteUserServiceInterface } from "./deleteUser/interfaces/delete-user-service.interface";
 
 @controller("/users")
 export class UserController
@@ -32,6 +34,8 @@ export class UserController
 
   private readonly updateUserService: UpdateUserServiceInterface;
 
+  private readonly deleteUserService: DeleteUserServiceInterface;
+
   constructor(
     @inject(TYPES.CreateUserServiceInterface)
     createUserService: CreateUserServiceInterface,
@@ -40,13 +44,16 @@ export class UserController
     @inject(TYPES.GetAllUsersServiceInterface)
     getAllUsersService: GetAllUsersServiceInterface,
     @inject(TYPES.UpdateUserServiceInterface)
-    updateUserService: UpdateUserServiceInterface
+    updateUserService: UpdateUserServiceInterface,
+    @inject(TYPES.DeleteUserServiceInterface)
+    deleteUserService: DeleteUserServiceInterface
   ) {
     super();
     this.createUserService = createUserService;
     this.getUserService = getUserService;
     this.getAllUsersService = getAllUsersService;
     this.updateUserService = updateUserService;
+    this.deleteUserService = deleteUserService;
   }
 
   @httpPost("/", SchemaValidator.validateBody("createUserSchema"))
@@ -83,6 +90,16 @@ export class UserController
     @response() res: express.Response
   ) {
     await this.updateUserService.execute({ id, name: body.name });
+
+    return res.status(200).send();
+  }
+
+  @httpDelete("/:id")
+  public async delete(
+    @requestParam("id") id: string,
+    @response() res: express.Response
+  ) {
+    await this.deleteUserService.execute({ id });
 
     return res.status(200).send();
   }
